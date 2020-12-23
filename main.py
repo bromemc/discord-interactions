@@ -23,6 +23,7 @@ def interactions():
                 }
             })
         if command_id == "791434396024307712":
+            print(request.json)
             return jsonify({
                 'type': InteractionResponseType.CHANNEL_MESSAGE,
                 'data': {
@@ -30,7 +31,6 @@ def interactions():
                     'flags': 64
                 }
             })
-        print(request.json)
 
 
 
