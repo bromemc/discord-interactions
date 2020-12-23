@@ -46,7 +46,7 @@ def interactions():
                 })
             flags_int = request.json['data']['options'][0]["options"][0]["value"]
             str_flags = []
-            # (getFlagsAsInteger() & flagEnum.getValue()) == flagEnum.getValue()
+
             for flag in Flags:
                 if (flags_int & flag.value) == flag.value:
                     str_flags.append(str(flag))
