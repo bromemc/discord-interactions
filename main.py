@@ -40,7 +40,7 @@ def interactions():
             str_flags = []
             # (getFlagsAsInteger() & flagEnum.getValue()) == flagEnum.getValue()
             for flag in Flags:
-                if (flags_int & flag.value) == flag:
+                if (flags_int & flag.value()) == flag.value():
                     str_flags.append(str(flag))
 
             print(str_flags)
