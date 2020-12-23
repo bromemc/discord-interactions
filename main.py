@@ -41,8 +41,9 @@ def interactions():
             # (getFlagsAsInteger() & flagEnum.getValue()) == flagEnum.getValue()
             for flag in Flags:
                 if (flags_int & flag.value) == flag:
-                    str_flags.append(flag)
+                    str_flags.append(str(flag))
 
+            print(str_flags)
             return jsonify({
                 'type': InteractionResponseType.CHANNEL_MESSAGE,
                 'data': {
