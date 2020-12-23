@@ -30,6 +30,7 @@ def interactions():
                     'flags': 64
                 }
             })
+        print(request.json)
 
 
 
