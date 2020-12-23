@@ -13,13 +13,24 @@ app = Flask(__name__)
 @verify_key_decorator(CLIENT_PUBLIC_KEY)
 def interactions():
     if request.json['type'] == InteractionType.APPLICATION_COMMAND:
-        return jsonify({
-            'type': InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-            'data': {
-                'content': 'https://trello.com/b/LwtOpeci/bromemc',
-                'flags': 64
-            }
-        })
+        command_id = request.json['data']['id']
+        if command_id == "791069362114265108": # trello
+            return jsonify({
+                'type': InteractionResponseType.CHANNEL_MESSAGE,
+                'data': {
+                    'content': 'https://trello.com/b/LwtOpeci/bromemc',
+                    'flags': 64
+                }
+            })
+        if command_id == "791434396024307712":
+            return jsonify({
+                'type': InteractionResponseType.CHANNEL_MESSAGE,
+                'data': {
+                    'content': f'yes',
+                    'flags': 64
+                }
+            })
+
 
 
 @app.route('/')
