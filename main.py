@@ -11,7 +11,6 @@ app = Flask(__name__)
 
 
 class Flags(Enum):
-    NONE = 0
     ADMIN_POWER = 1 << 0
     MOD_POWER = 1 << 1
     MFA_REQUIRED = 1 << 2
