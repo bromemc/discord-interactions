@@ -40,7 +40,7 @@ def interactions():
             str_flags = []
             # (getFlagsAsInteger() & flagEnum.getValue()) == flagEnum.getValue()
             for flag in Flags:
-                if (flags_int & flag) == flag:
+                if (flags_int & flag.value) == flag:
                     str_flags.append(flag)
 
             return jsonify({
