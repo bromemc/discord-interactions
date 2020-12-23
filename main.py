@@ -12,12 +12,16 @@ app = Flask(__name__)
 @app.route('/interactions', methods=['POST'])
 @verify_key_decorator(CLIENT_PUBLIC_KEY)
 def interactions():
-    print(request.json)
+    if request.json['data']['name'] == "trello":
+        return jsonify({
+            'content': 'https://trello.com/b/LwtOpeci/bromemc',
+            'flags': 64
+        })
 
 
 @app.route('/')
 def root():
-    return jsonify({message: "gtfo"})
+    return jsonify({'message': "The maze wasn't meant for you."})
 
 
 if __name__ == '__main__':
