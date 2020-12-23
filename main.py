@@ -13,3 +13,7 @@ app = Flask(__name__)
 @verify_key_decorator(CLIENT_PUBLIC_KEY)
 def interactions():
     print(request.json)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
