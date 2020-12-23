@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask, jsonify, request
+from enum import Enum
 
 from discord_interactions import verify_key_decorator, InteractionType, InteractionResponseType
 
@@ -9,12 +10,24 @@ CLIENT_PUBLIC_KEY = "cc8d90dfdb6b3efa4fbd586a23682c69e1463f856313e3e2f62ddd55cb7
 app = Flask(__name__)
 
 
+class Flags(Enum):
+    NONE = 0
+    ADMIN_POWER = 1 << 0
+    MOD_POWER = 1 << 1
+    MFA_REQUIRED = 1 << 2
+    HOST_BAN = 1 << 3
+    TRAINEE = 1 << 4
+    ONBOARDING = 1 << 5
+    DISCOURAGE_USER = 1 << 6
+    MFA_ENABLED = 1 << 7
+
+
 @app.route('/interactions', methods=['POST'])
 @verify_key_decorator(CLIENT_PUBLIC_KEY)
 def interactions():
     if request.json['type'] == InteractionType.APPLICATION_COMMAND:
         command_id = request.json['data']['id']
-        if command_id == "791069362114265108": # trello
+        if command_id == "791069362114265108":  # trello
             return jsonify({
                 'type': InteractionResponseType.CHANNEL_MESSAGE,
                 'data': {
@@ -23,15 +36,20 @@ def interactions():
                 }
             })
         if command_id == "791434396024307712" and request.json['data']['options'][0]["name"] == "flag":
-            print(request.json)
+            flags_int = request.json['data']['options'][0]["options"][0]["value"]
+            str_flags = []
+            # (getFlagsAsInteger() & flagEnum.getValue()) == flagEnum.getValue()
+            for flag in Flags:
+                if (flags_int & flag) == flag:
+                    str_flags.append(flag)
+
             return jsonify({
                 'type': InteractionResponseType.CHANNEL_MESSAGE,
                 'data': {
-                    'content': '{}'.format(request.json['data']['options'][0]["options"][0]["value"]),
+                    'content': '{}'.format(', '.join(str_flags)),
                     'flags': 64
                 }
             })
-
 
 
 @app.route('/')
