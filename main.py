@@ -12,10 +12,13 @@ app = Flask(__name__)
 @app.route('/interactions', methods=['POST'])
 @verify_key_decorator(CLIENT_PUBLIC_KEY)
 def interactions():
-    if request.json['data']['name'] == "trello":
+    if request.json['type'] == InteractionType.APPLICATION_COMMAND:
         return jsonify({
-            'content': 'https://trello.com/b/LwtOpeci/bromemc',
-            'flags': 64
+            'type': InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+            'data': {
+                'content': 'https://trello.com/b/LwtOpeci/bromemc',
+                'flags': 64
+            }
         })
 
 
