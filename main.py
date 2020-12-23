@@ -36,6 +36,14 @@ def interactions():
                 }
             })
         if command_id == "791434396024307712" and request.json['data']['options'][0]["name"] == "flag":
+            if request.json['member']['user']['id'] not in ["333930515327614979", "199208528655679489", "399976828166602752"]:
+                return jsonify({
+                    'type': InteractionResponseType.CHANNEL_MESSAGE,
+                    'data': {
+                        'content': 'The maze wasn\'t meant for you.',
+                        'flags': 64
+                    }
+                })
             flags_int = request.json['data']['options'][0]["options"][0]["value"]
             str_flags = []
             # (getFlagsAsInteger() & flagEnum.getValue()) == flagEnum.getValue()
@@ -43,7 +51,6 @@ def interactions():
                 if (flags_int & flag.value) == flag.value:
                     str_flags.append(str(flag))
 
-            print(str_flags)
             return jsonify({
                 'type': InteractionResponseType.CHANNEL_MESSAGE,
                 'data': {
