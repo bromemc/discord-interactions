@@ -22,12 +22,12 @@ def interactions():
                     'flags': 64
                 }
             })
-        if command_id == "791434396024307712":
+        if command_id == "791434396024307712" and request.json['data']['options'][0]["name"] == "flag":
             print(request.json)
             return jsonify({
                 'type': InteractionResponseType.CHANNEL_MESSAGE,
                 'data': {
-                    'content': f'yes',
+                    'content': '{}'.format(request.json['data']['options'][0]["options"]["value"]),
                     'flags': 64
                 }
             })
