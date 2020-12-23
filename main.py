@@ -27,7 +27,7 @@ def interactions():
             return jsonify({
                 'type': InteractionResponseType.CHANNEL_MESSAGE,
                 'data': {
-                    'content': '{}'.format(request.json['data']['options'][0]["options"]["value"]),
+                    'content': '{}'.format(request.json['data']['options'][0]["name"]),
                     'flags': 64
                 }
             })
